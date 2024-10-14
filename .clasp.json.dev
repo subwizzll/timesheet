@@ -1,1 +1,5 @@
-{"scriptId":"1vrAVDdx8tckaA-DcKtzdomkzPhPrHMbh1vy4uXhrQKLdhemt21B483Jj","rootDir":"/Users/jared.russell/HRC/timesheet/src"}
+{
+  "scriptId": "1vrAVDdx8tckaA-DcKtzdomkzPhPrHMbh1vy4uXhrQKLdhemt21B483Jj",
+  "parentId": ["1JJ0wEzj0mmkkUKlVbWJwPtf1EhlXfRe9Fmq8imPxnRc"],
+  "rootDir": "./dist"
+}

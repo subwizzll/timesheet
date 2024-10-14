@@ -18,6 +18,10 @@
       }
     },
     "sheets": {
+      "macros": [{
+        "menuName": "NewPrintMission",
+        "functionName": "NewPrintMission"
+      }],
       "homepageTrigger": {
         "runFunction": "onOpen",
         "enabled": true

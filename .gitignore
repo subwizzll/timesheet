@@ -12,3 +12,28 @@ yarn-error.log*
 
 .vscode/*
 build/
+
+# clasp files
+creds.json
+
+# certs
+*.pem
+certs/
+
+# build
+dist/
+
+# mac
+.DS_Store
+
+#secret
+.env
+
+#demo
+/src/client/dialog-demo/
+/src/client/dialog-demo-bootstrap/
+/src/client/dialog-demo-mui/
+/src/client/dialog-demo-tailwindcss/
+/src/client/sidebar-about-page/
+
+clientEntryPoints.development.ts

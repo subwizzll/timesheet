@@ -1,7 +1,7 @@
 'use strict';
 
 /** @OnlyCurrentDoc */
-function NewPrintMission() {
+export function NewPrintMission() {
     var spreadsheet = SpreadsheetApp.getActive();
 
     /** Copies the mission number to B1*/
