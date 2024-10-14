@@ -1,7 +1,27 @@
 {
   "timeZone": "America/New_York",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/script.container.ui"
+  ],
   "dependencies": {
   },
   "exceptionLogging": "STACKDRIVER",
-  "runtimeVersion": "V8"
+  "runtimeVersion": "V8",
+  "addOns": {
+    "common": {
+      "name": "Volunteer Timesheet Add-on",
+      "logoUrl": "URL_TO_YOUR_LOGO",
+      "layoutProperties": {
+        "primaryColor": "#4285F4",
+        "secondaryColor": "#DB4437"
+      }
+    },
+    "sheets": {
+      "homepageTrigger": {
+        "runFunction": "onOpen",
+        "enabled": true
+      }
+    }
+  }
 }

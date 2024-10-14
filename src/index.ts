@@ -24,15 +24,17 @@ function testFunction () {
     testLambda();
 }
 
-function showSidebar() {
-    const ui = SpreadsheetApp.getUi();
-    let html = HtmlService.createHtmlOutputFromFile('testPage.html');
-    ui.showSidebar(html);
+const getUi = (): GoogleAppsScript.Base.Ui => SpreadsheetApp.getUi();
+const getApp = () => HtmlService.createHtmlOutputFromFile('app')
+    .setSandboxMode(HtmlService.SandboxMode.IFRAME);
+
+function showSideBar() {
+    getUi().showSidebar(getApp());
 }
 
 function onOpen(e: any) {
-    const ui = SpreadsheetApp.getUi();
-    ui.createMenu('Volunteer Management')
-        .addItem('Start', 'timesheet.showSideBar')
+    getUi()
+        .createMenu('Volunteer Management')
+        .addItem('Start', 'showSideBar')
         .addToUi();
 }
