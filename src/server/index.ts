@@ -1,5 +1,6 @@
 import {
   onOpen,
+  openTimeSheet,
   openDialog,
   openDialogBootstrap,
   openDialogMUI,
@@ -13,6 +14,7 @@ import { NewPrintMission } from './macros';
 // Public functions must be exported as named exports
 export {
   onOpen,
+  openTimeSheet,
   openDialog,
   openDialogBootstrap,
   openDialogMUI,

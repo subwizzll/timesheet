@@ -12,14 +12,15 @@ export const onOpen = () => {
 };
 
 export const openTimeSheet = () => {
-  const html = HtmlService.createHtmlOutputFromFile('time-sheet');
-  SpreadsheetApp.getUi().showModelessDialog(html, 'Time Sheet');
+  const html = HtmlService.createHtmlOutputFromFile('time-sheet')
+      .setTitle('Time Sheet')
+      .setWidth(1280)
+      .setHeight(800);
+  SpreadsheetApp.getActiveSpreadsheet().show(html);
 };
 
 export const openDialog = () => {
   const html = HtmlService.createHtmlOutputFromFile('dialog-demo')
-    .setWidth(600)
-    .setHeight(600);
   SpreadsheetApp.getUi().showModalDialog(html, 'Sheet Editor');
 };
 
