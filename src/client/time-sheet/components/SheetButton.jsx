@@ -9,9 +9,7 @@ const SheetButton = ({ sheetDetails, deleteSheet, setActiveSheet }) => {
         &times;
       </button>
       <button className="basicButton" onClick={() => setActiveSheet(name)}>
-        <span className={`sheetNameText ${isActive ? 'active-sheet' : ''}`}>
-          {name}
-        </span>
+        <span className={`sheetNameText ${isActive ? 'active-sheet' : ''}`}>{name}</span>
       </button>
     </div>
   );

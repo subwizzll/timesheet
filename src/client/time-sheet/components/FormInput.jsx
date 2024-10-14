@@ -11,7 +11,7 @@ const FormInput = ({ submitNewSheet }) => {
     notes: '',
   });
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const { name, value } = event.target;
     setTimeSheet(prevState => ({
       ...prevState,
@@ -19,7 +19,7 @@ const FormInput = ({ submitNewSheet }) => {
     }));
   };
 
-  const handleVolunteerChange = (event) => {
+  const handleVolunteerChange = event => {
     const { name, value } = event.target;
     setTimeSheet(prevState => ({
       ...prevState,
@@ -30,7 +30,7 @@ const FormInput = ({ submitNewSheet }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     submitNewSheet(timeSheet);
     // Reset form after submission
@@ -45,67 +45,62 @@ const FormInput = ({ submitNewSheet }) => {
   };
 
   return (
-      <div className="formBlock">
-        <form onSubmit={handleSubmit}>
+    <div className="formBlock">
+      <form onSubmit={handleSubmit}>
+        <div>
+          <span>Add Time Sheet</span>
+        </div>
+        <div>
+          <input
+            type="date"
+            name="date"
+            onChange={handleChange}
+            value={timeSheet.date.toISOString().split('T')[0]}
+            required
+          />
+          <input
+            name="name"
+            onChange={handleVolunteerChange}
+            value={timeSheet.volunteer.name}
+            placeholder="Volunteer Name"
+            required
+          />
+          <input
+            name="id"
+            onChange={handleVolunteerChange}
+            value={timeSheet.volunteer.id}
+            placeholder="Volunteer ID"
+            required
+          />
+          <textarea name="notes" onChange={handleChange} value={timeSheet.notes} placeholder="Notes" />
           <div>
-            <span>Add Time Sheet</span>
+            <label>
+              <input
+                type="checkbox"
+                name="isConfirmed"
+                checked={timeSheet.isConfirmed}
+                onChange={e => setTimeSheet(prev => ({ ...prev, isConfirmed: e.target.checked }))}
+              />
+              Confirmed
+            </label>
           </div>
           <div>
-            <input
-                type="date"
-                name="date"
-                onChange={handleChange}
-                value={timeSheet.date.toISOString().split('T')[0]}
-                required
-            />
-            <input
-                name="name"
-                onChange={handleVolunteerChange}
-                value={timeSheet.volunteer.name}
-                placeholder="Volunteer Name"
-                required
-            />
-            <input
-                name="id"
-                onChange={handleVolunteerChange}
-                value={timeSheet.volunteer.id}
-                placeholder="Volunteer ID"
-                required
-            />
-            <textarea
-                name="notes"
-                onChange={handleChange}
-                value={timeSheet.notes}
-                placeholder="Notes"
-            />
-            <div>
-              <label>
-                <input
-                    type="checkbox"
-                    name="isConfirmed"
-                    checked={timeSheet.isConfirmed}
-                    onChange={(e) => setTimeSheet(prev => ({ ...prev, isConfirmed: e.target.checked }))}
-                />
-                Confirmed
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                    type="checkbox"
-                    name="isPaid"
-                    checked={timeSheet.isPaid}
-                    onChange={(e) => setTimeSheet(prev => ({ ...prev, isPaid: e.target.checked }))}
-                />
-                Paid
-              </label>
-            </div>
-            <button className="submit" type="submit">
-              Add Time Sheet
-            </button>
+            <label>
+              <input
+                type="checkbox"
+                name="isPaid"
+                checked={timeSheet.isPaid}
+                onChange={e => setTimeSheet(prev => ({ ...prev, isPaid: e.target.checked }))}
+              />
+              Paid
+            </label>
           </div>
-        </form>
-      </div>
+          <button className="submit" type="submit">
+            Add Time Sheet
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -14,17 +14,17 @@ const SheetEditor = () => {
     serverFunctions.getSheetsData().then(setNames).catch(alert);
   }, []);
 
-  const deleteSheet = (sheetIndex) => {
+  const deleteSheet = sheetIndex => {
     serverFunctions.deleteSheet(sheetIndex).then(setNames).catch(alert);
   };
 
-  const setActiveSheet = (sheetName) => {
+  const setActiveSheet = sheetName => {
     serverFunctions.setActiveSheet(sheetName).then(setNames).catch(alert);
   };
 
   // You can also use async/await notation for server calls with our server wrapper.
   // (This does the same thing as .then().catch() in the above handlers.)
-  const submitNewSheet = async (newSheetName) => {
+  const submitNewSheet = async newSheetName => {
     try {
       const response = await serverFunctions.addSheet(newSheetName);
       setNames(response);
@@ -39,23 +39,13 @@ const SheetEditor = () => {
       <p>
         <b>Add Time Sheet</b>
       </p>
-      <p>
-        Entry volunteer time here:
-      </p>
+      <p>Entry volunteer time here:</p>
       <FormInput submitNewSheet={submitNewSheet} />
       <TransitionGroup className="sheet-list">
         {names.length > 0 &&
-          names.map((name) => (
-            <CSSTransition
-              classNames="sheetNames"
-              timeout={500}
-              key={name.name}
-            >
-              <SheetButton
-                sheetDetails={name}
-                deleteSheet={deleteSheet}
-                setActiveSheet={setActiveSheet}
-              />
+          names.map(name => (
+            <CSSTransition classNames="sheetNames" timeout={500} key={name.name}>
+              <SheetButton sheetDetails={name} deleteSheet={deleteSheet} setActiveSheet={setActiveSheet} />
             </CSSTransition>
           ))}
       </TransitionGroup>

@@ -1,7 +1,12 @@
 export const clientEntryPoints = [
-    {
-        name: 'Time Sheet',
-        filename: 'time-sheet', // we'll add the .html suffix to these
-        template: 'time-sheet/index.html',
-    }
+  {
+    name: 'Dashboard',
+    filename: 'dashboard',
+    template: 'dashboard/index.html',
+  },
+  {
+    name: 'Time Sheet',
+    filename: 'time-sheet',
+    template: 'time-sheet/index.html',
+  },
 ];

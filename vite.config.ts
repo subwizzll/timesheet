@@ -47,13 +47,7 @@ const clientServeConfig = () =>
     root: clientRoot,
   });
 
-const clientBuildConfig = ({
-  clientEntrypointRoot,
-  template,
-}: {
-  clientEntrypointRoot: string;
-  template: string;
-}) =>
+const clientBuildConfig = ({ clientEntrypointRoot, template }: { clientEntrypointRoot: string; template: string }) =>
   defineConfig({
     plugins: [react(), viteSingleFile({ useRecommendedBuildConfig: true })],
     root: resolve(__dirname, clientRoot, clientEntrypointRoot),
@@ -108,10 +102,7 @@ const serverBuildConfig: BuildOptions = {
     output: {
       entryFileNames: 'code.js',
       extend: true,
-      footer: (chunk) =>
-        chunk.exports
-          .map((exportedFunction) => `function ${exportedFunction}() {};`)
-          .join('\n'),
+      footer: chunk => chunk.exports.map(exportedFunction => `function ${exportedFunction}() {};`).join('\n'),
     },
   },
 };
@@ -119,9 +110,12 @@ const serverBuildConfig: BuildOptions = {
 const buildConfig = ({ mode }: { mode: string }) => {
   const targets = [{ src: copyAppscriptEntry, dest: './' }];
   if (mode === 'development') {
-    const clientEntryPoints = require('./clientEntryPoints.development').clientEntryPoints;
+    const clientEntryPoints = [
+      ...require('./clientEntryPoints').clientEntryPoints,
+      ...require('./clientEntryPoints.development').clientEntryPoints,
+    ];
     targets.push(
-      ...clientEntryPoints.map((entrypoint) => ({
+      ...clientEntryPoints.map(entrypoint => ({
         src: devServerWrapper,
         dest: './',
         rename: `${entrypoint.filename}.html`,
@@ -130,7 +124,7 @@ const buildConfig = ({ mode }: { mode: string }) => {
             .toString()
             .replace(/__PORT__/g, String(PORT))
             .replace(/__FILE_NAME__/g, entrypoint.template),
-      }))
+      })),
     );
   }
   return defineConfig({
@@ -148,7 +142,7 @@ const buildConfig = ({ mode }: { mode: string }) => {
       mode === 'production' && {
         name: 'build-client-production-bundles',
         closeBundle: async () => {
-          const clientEntryPoints = require('./clientEntryPoints').clientEntryPoints;
+          const { clientEntryPoints } = require('./clientEntryPoints');
           console.log('Building client production bundles...');
           // eslint-disable-next-line no-restricted-syntax
           for (const clientEntryPoint of clientEntryPoints) {
@@ -158,13 +152,13 @@ const buildConfig = ({ mode }: { mode: string }) => {
               clientBuildConfig({
                 clientEntrypointRoot: clientEntryPoint.filename,
                 template: clientEntryPoint.template,
-              })
+              }),
             );
             // eslint-disable-next-line no-await-in-loop
             await writeFile(
               resolve(__dirname, outDir, `${clientEntryPoint.filename}.html`),
               // @ts-expect-error - output is an array of RollupOutput
-              buildOutput.output[0].source
+              buildOutput.output[0].source,
             );
           }
           console.log('Finished building client bundles!');

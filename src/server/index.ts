@@ -1,5 +1,6 @@
 import {
   onOpen,
+  openDashBoard,
   openTimeSheet,
   openDialog,
   openDialogBootstrap,
@@ -9,11 +10,11 @@ import {
 } from './ui';
 
 import { getSheetsData, addSheet, deleteSheet, setActiveSheet } from './sheets';
-import { NewPrintMission } from './macros';
 
 // Public functions must be exported as named exports
 export {
   onOpen,
+  openDashBoard,
   openTimeSheet,
   openDialog,
   openDialogBootstrap,
@@ -24,5 +25,4 @@ export {
   addSheet,
   deleteSheet,
   setActiveSheet,
-  NewPrintMission,
 };
